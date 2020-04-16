@@ -1,7 +1,9 @@
 const defaultSize = 16;
 const container = document.querySelector('#container');
-const resetButton = document.querySelector('#btn');
-resetButton.addEventListener('click', resetGrid);
+const gridBtn = document.querySelector('#gridBtn');
+const colorBtn = document.querySelector('#colorBtn');
+gridBtn.addEventListener('click', resetGrid);
+colorBtn.addEventListener('click', resetColor);
 createBlock(defaultSize);
 
 function createBlock(size) {
@@ -21,8 +23,15 @@ function resetGrid() {
     createBlock(size);
 }
 
+function resetColor() {
+    let divs = document.querySelectorAll('.block');
+    divs.forEach(element => {
+        element.removeAttribute('style');
+    });
+}
+
 function changeColor(element) {
-    if (element.style.backgroundColor == '') {
+    if (element.style.backgroundColor === '') {
         element.style.backgroundColor = getRandomColor();
     } 
 }
