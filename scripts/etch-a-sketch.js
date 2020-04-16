@@ -1,21 +1,23 @@
-const container = document.getElementById('container');
 const defaultSize = 16;
-
+const container = document.querySelector('#container');
+const resetButton = document.querySelector('#btn');
+resetButton.addEventListener('click', resetGrid);
+createBlock(defaultSize);
 
 function createBlock(size) {
-    container.style.grid = 'repeat(' + size + ', 1fr)/repeat(' + size +', 1fr)';
-    for(i = 0; i < size * size; i++) {
-        var div = document.createElement('DIV');
-        div.setAttribute('class', 'block');
-        div.onmouseenter = function() {changeColor(this)};
+    container.style.grid = `repeat(${size}, 1fr) / repeat(${size} ,1fr)`;
+    for(i = 0; i < size ** 2; i++) {
+        let div = document.createElement('div');
+        div.classList.toggle('block');
+        div.addEventListener('mouseenter', () => changeColor(div));
         container.appendChild(div)
     }
 }
 
 function resetGrid() {
-    document.getElementById('container').innerHTML = '';
+    document.getElementById('container').textContent = '';
     console.log('cleared');
-    var size = prompt('Enter size of grid side');
+    let size = prompt('Enter size of grid side');
     createBlock(size);
 }
 
@@ -26,14 +28,11 @@ function changeColor(element) {
 }
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
+    console.log(color);
     return color;
   }
-
-const button = document.getElementById('button0');
-button.onclick = resetGrid;
-createBlock(defaultSize);
