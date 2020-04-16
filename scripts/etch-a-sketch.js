@@ -33,7 +33,15 @@ function resetColor() {
 function changeColor(element) {
     if (element.style.backgroundColor === '') {
         element.style.backgroundColor = getRandomColor();
-    } 
+    } else {
+        let brightness = element.style.filter;
+        if (brightness === '') {
+            element.style.filter = 'brightness(90%)';
+        } else {
+            brightness = brightness.replace(/\D/g, '');
+            element.style.filter = `brightness(${brightness - 10}%)`;
+        }
+    }
 }
 
 function getRandomColor() {
@@ -42,6 +50,5 @@ function getRandomColor() {
     for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
-    console.log(color);
     return color;
   }
