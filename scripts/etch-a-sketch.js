@@ -7,48 +7,48 @@ colorBtn.addEventListener('click', resetColor);
 createBlock(defaultSize);
 
 function createBlock(size) {
-    container.style.grid = `repeat(${size}, 1fr) / repeat(${size} ,1fr)`;
-    for(i = 0; i < size ** 2; i++) {
-        let div = document.createElement('div');
-        div.classList.toggle('block');
-        div.addEventListener('mouseenter', () => changeColor(div));
-        container.appendChild(div)
-    }
+  container.style.grid = `repeat(${size}, 1fr) / repeat(${size} ,1fr)`;
+  for (i = 0; i < size ** 2; i++) {
+    let div = document.createElement('div');
+    div.classList.toggle('block');
+    div.addEventListener('mouseenter', () => changeColor(div));
+    container.appendChild(div);
+  }
 }
 
 function resetGrid() {
-    document.getElementById('container').textContent = '';
-    console.log('cleared');
-    let size = prompt('Enter size of grid side');
-    createBlock(size);
+  document.getElementById('container').textContent = '';
+  console.log('cleared');
+  let size = prompt('Enter size of grid side');
+  createBlock(size);
 }
 
 function resetColor() {
-    let divs = document.querySelectorAll('.block');
-    divs.forEach(element => {
-        element.removeAttribute('style');
-    });
+  let divs = document.querySelectorAll('.block');
+  divs.forEach((element) => {
+    element.removeAttribute('style');
+  });
 }
 
 function changeColor(element) {
-    if (element.style.backgroundColor === '') {
-        element.style.backgroundColor = getRandomColor();
+  if (element.style.backgroundColor === '') {
+    element.style.backgroundColor = getRandomColor();
+  } else {
+    let brightness = element.style.filter;
+    if (brightness === '') {
+      element.style.filter = 'brightness(90%)';
     } else {
-        let brightness = element.style.filter;
-        if (brightness === '') {
-            element.style.filter = 'brightness(90%)';
-        } else {
-            brightness = brightness.replace(/\D/g, '');
-            element.style.filter = `brightness(${brightness - 10}%)`;
-        }
+      brightness = brightness.replace(/\D/g, '');
+      element.style.filter = `brightness(${brightness - 10}%)`;
     }
+  }
 }
 
 function getRandomColor() {
-    let letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
   }
+  return color;
+}
